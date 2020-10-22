@@ -32,6 +32,7 @@ import com.tencent.sqlitelint.SQLiteLint;
 import com.tencent.sqlitelint.SQLiteLintPlugin;
 import com.tencent.sqlitelint.config.SQLiteLintConfig;
 
+import me.weishu.reflection.Reflection;
 import sample.tencent.matrix.config.DynamicConfigImplDemo;
 import sample.tencent.matrix.listener.TestPluginListener;
 import sample.tencent.matrix.sqlitelint.TestSQLiteLintActivity;
@@ -57,6 +58,12 @@ public class MatrixApplication extends Application {
         } catch (Throwable t) {
             return new SQLiteLintConfig(SQLiteLint.SqlExecutionCallbackMode.HOOK);
         }
+    }
+
+    @Override
+    protected void attachBaseContext(Context base) {
+        super.attachBaseContext(base);
+        Reflection.unseal(base);
     }
 
     @Override

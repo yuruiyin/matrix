@@ -52,7 +52,7 @@ public class IssuesListActivity extends AppCompatActivity {
     private final static int toastCount = 3;
     private static int currToastCount = 0;
     private RecyclerView recyclerView;
-    private final static File methodFilePath = new File(Environment.getExternalStorageDirectory(), "Debug.methodmap");
+    private static File methodFilePath;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -68,7 +68,7 @@ public class IssuesListActivity extends AppCompatActivity {
             Toast.makeText(this, "click view to hide or show issue detail", Toast.LENGTH_LONG).show();
         }
 
-
+        methodFilePath = new File(getExternalFilesDir(""), "Debug.methodmap");
     }
 
     public void initRecyclerView() {
@@ -164,6 +164,9 @@ public class IssuesListActivity extends AppCompatActivity {
             BufferedReader reader = null;
             String tempString = null;
             try {
+                if (!methodFilePath.exists()) {
+                    methodFilePath.createNewFile();
+                }
                 reader = new BufferedReader(new FileReader(methodFilePath));
                 while ((tempString = reader.readLine()) != null) {
                     String[] contents = tempString.split(",");

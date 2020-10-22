@@ -75,7 +75,7 @@ public final class CloseGuardHooker {
         try {
             Class<?> closeGuardCls = Class.forName("dalvik.system.CloseGuard");
             Class<?> closeGuardReporterCls = Class.forName("dalvik.system.CloseGuard$Reporter");
-            Method methodGetReporter = closeGuardCls.getDeclaredMethod("getReporter");
+            Method methodGetReporter = closeGuardCls.getDeclaredMethod("getReporter", closeGuardReporterCls);
             Method methodSetReporter = closeGuardCls.getDeclaredMethod("setReporter", closeGuardReporterCls);
             Method methodSetEnabled = closeGuardCls.getDeclaredMethod("setEnabled", boolean.class);
 

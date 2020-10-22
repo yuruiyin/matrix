@@ -51,6 +51,9 @@ public class TestIOActivity extends Activity {
     private static final String TAG = "Matrix.TestIoActivity";
     private static final int EXTERNAL_STORAGE_REQ_CODE = 0x1;
 
+    // /storage/emulated/0/Android/data/<package>/files
+    private String privateExternalFilesDir;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -63,6 +66,8 @@ public class TestIOActivity extends Activity {
             MatrixLog.i(TAG, "plugin-io start");
             plugin.start();
         }
+
+        privateExternalFilesDir = getExternalFilesDir("").getAbsolutePath();
 
     }
 
@@ -118,7 +123,7 @@ public class TestIOActivity extends Activity {
 
     private void writeLongSth() {
         try {
-            File f = new File("/sdcard/a_long.txt");
+            File f = new File(privateExternalFilesDir + "/a_long.txt");
             if (f.exists()) {
                 f.delete();
             }
@@ -142,7 +147,7 @@ public class TestIOActivity extends Activity {
 
     private void writeSth() {
         try {
-            File f = new File("/sdcard/a.txt");
+            File f = new File(privateExternalFilesDir + "/a.txt");
             if (f.exists()) {
                 f.delete();
             }
@@ -166,7 +171,7 @@ public class TestIOActivity extends Activity {
 
     private void readSth() {
         try {
-            File f = new File("/sdcard/a_long.txt");
+            File f = new File(privateExternalFilesDir + "/a_long.txt");
             byte[] buf = new byte[400];
             FileInputStream fis = new FileInputStream(f);
             int count = 0;
@@ -185,7 +190,7 @@ public class TestIOActivity extends Activity {
     private void leakSth() {
         writeSth();
         try {
-            File f = new File("/sdcard/a.txt");
+            File f = new File(privateExternalFilesDir + "/a.txt");
             byte[] buf = new byte[400];
             FileInputStream fis = new FileInputStream(f);
             int count = 0;

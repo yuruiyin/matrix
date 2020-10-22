@@ -9,7 +9,7 @@ buildscript {
 
     dependencies {
         // classpath
-        classpath 'com.android.tools.build:gradle:3.2.1'
+        classpath 'com.android.tools.build:gradle:4.0.1'
         classpath 'com.jfrog.bintray.gradle:gradle-bintray-plugin:1.7.3'
         classpath 'digital.wup:android-maven-publish:3.6.2'
     }
@@ -38,11 +38,11 @@ allprojects {
 ext {
     // For android sub-projects
     minSdkVersion = 19
-    targetSdkVersion = 23
+    targetSdkVersion = 28
     compileSdkVersion = 28
     buildToolsVersion = '28.0.3'
 
-    javaVersion = JavaVersion.VERSION_1_7
+    javaVersion = JavaVersion.VERSION_1_8
 
     GROUP = 'com.tencent.matrix'
     VERSION_NAME = "${VERSION_NAME_PREFIX}${VERSION_NAME_SUFFIX}"

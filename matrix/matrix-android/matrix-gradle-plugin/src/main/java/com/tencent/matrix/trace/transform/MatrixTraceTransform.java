@@ -70,19 +70,21 @@ public class MatrixTraceTransform extends Transform {
 
         GlobalScope globalScope = variantScope.getGlobalScope();
         BaseVariantData variant = variantScope.getVariantData();
+        String gradleVersion = project.getGradle().getGradleVersion();
+//        String dirName = gradleVersion.compareTo("")
         String mappingOut = Joiner.on(File.separatorChar).join(
                 String.valueOf(globalScope.getBuildDir()),
                 FD_OUTPUTS,
                 "mapping",
-                variantScope.getVariantConfiguration().getDirName());
+                variantScope.getVariantDslInfo().getDirName());
 
         String traceClassOut = Joiner.on(File.separatorChar).join(
                 String.valueOf(globalScope.getBuildDir()),
                 FD_OUTPUTS,
                 "traceClassOut",
-                variantScope.getVariantConfiguration().getDirName());
+                variantScope.getVariantDslInfo().getDirName());
         Configuration config = new Configuration.Builder()
-                .setPackageName(variant.getApplicationId())
+                .setPackageName(variant.getVariantDslInfo().getApplicationId())
                 .setBaseMethodMap(extension.getBaseMethodMapFile())
                 .setBlackListFile(extension.getBlackListFile())
                 .setMethodMapFilePath(mappingOut + "/methodMapping.txt")
@@ -140,7 +142,7 @@ public class MatrixTraceTransform extends Transform {
     }
 
     @Override
-    public Set<QualifiedContent.Scope> getScopes() {
+    public Set<QualifiedContent.ScopeType> getScopes() {
         return TransformManager.SCOPE_FULL_PROJECT;
     }
 
@@ -353,7 +355,7 @@ public class MatrixTraceTransform extends Transform {
 
             if (!dirInput.exists() && dirOutput.exists()) {
                 if (dirOutput.isDirectory()) {
-                    FileUtils.deleteFolder(dirOutput);
+                    FileUtils.deleteDirectoryContents(dirOutput);
                 } else {
                     FileUtils.delete(dirOutput);
                 }

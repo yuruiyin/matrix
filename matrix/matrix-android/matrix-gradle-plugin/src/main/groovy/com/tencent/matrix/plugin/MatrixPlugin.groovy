@@ -56,7 +56,7 @@ class MatrixPlugin implements Plugin<Project> {
                         Log.i(TAG, "removeUnusedResources %s", configuration.removeUnusedResources)
                         RemoveUnusedResourcesTask removeUnusedResourcesTask = project.tasks.create("remove" + variant.name.capitalize() + "UnusedResources", RemoveUnusedResourcesTask)
                         removeUnusedResourcesTask.inputs.property(RemoveUnusedResourcesTask.BUILD_VARIANT, variant.name)
-                        project.tasks.add(removeUnusedResourcesTask)
+                        project.tasks.register("removeUnusedResources", removeUnusedResourcesTask.class)
                         removeUnusedResourcesTask.dependsOn variant.packageApplication
                         variant.assemble.dependsOn removeUnusedResourcesTask
                     }
