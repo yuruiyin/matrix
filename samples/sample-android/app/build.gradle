@@ -99,8 +99,8 @@ dependencies {
 
     implementation 'me.weishu:free_reflection:3.0.1'
 
-    implementation 'androidx.appcompat:appcompat:1.0.0'
-    implementation 'androidx.recyclerview:recyclerview:1.0.0'
+    implementation 'androidx.appcompat:appcompat:1.2.0'
+    implementation 'androidx.recyclerview:recyclerview:1.1.0'
     apkCheckerDependency group: "com.tencent.matrix", name: "matrix-apk-canary", version:MATRIX_VERSION, changing: true
 
     testImplementation 'junit:junit:4.12'
